@@ -14,7 +14,6 @@ import NotFoundPage from "./components/NotFoundPage";
 import Context from "./components/Context";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import AuthGaurd from "./gaurds/AuthGaurd";
 import FriendList from "./components/app/friend/FriendList";
 import MyPost from "./components/app/MyPost";
 
@@ -29,7 +28,6 @@ const App = () => {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
-          <Route element = {<AuthGaurd/>}>
             <Route path="/app" element={<Layout/>}>
               <Route path="dashboard" element={<Dashboard/>}/>
               <Route path="friends" element={<FriendList/>}/>
@@ -38,7 +36,6 @@ const App = () => {
               <Route path="audio-chat/:id" element={<AudioChat/>}/>
               <Route path="chat/:id" element={<Chat/>}/>
             </Route>
-          </Route>
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
         <ToastContainer/>
