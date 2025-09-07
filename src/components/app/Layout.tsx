@@ -5,8 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import Dashboard from "./Dashboard"
 import Context from "../Context"
 import HttpInterceptor from "../../lib/HttpInterceptor"
-import useSWR, { mutate } from 'swr'
-import Fetcher from "../../lib/Fetcher"
+import { mutate } from 'swr'
 import{v4 as uuid} from 'uuid'
 import CatchError from "../../lib/CatchError"
 import FriendSuggestion from "./friend/FriendSuggestion"
@@ -22,7 +21,6 @@ import { notification } from "antd"
 
 
 
-const EightMinutesInMs = (8*60)*1000
 
 const Layout = () => {
     const navigate = useNavigate()
@@ -64,10 +62,7 @@ const Layout = () => {
     }
 
 
-    const{error} = useSWR('/auth/refresh-token',Fetcher ,{
-        refreshInterval : EightMinutesInMs,
-        shouldRetryOnError : false
-    })
+    
 
     const{session,setSession,setLiveActiveSession,setSdp} = useContext(Context)
     const{liveActiveSession} = useContext(Context)
@@ -116,11 +111,6 @@ const Layout = () => {
         setCollapseSize(isMobile ? 0 : 140 )
     },[isMobile])
 
-    useEffect(()=>{
-        if(error){
-            logout()
-        }
-    },[error])
 
     const getPathname = (path:string) =>{
         const firstPath = path.split('/').pop()
